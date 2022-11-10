@@ -59,6 +59,7 @@ namespace ProjectV2.Bll.Services
         public async Task<UserDto> CreateUserAsync(UserUpdateDto userUpdateDto)
         {
             var user = _mapper.Map<User>(userUpdateDto);
+            user.RoleId = 2;
             if ( _repository.ExistInDbByEntityWithProperties(user, nameof(user.Username)))
             {
                 throw new ExistInDbException();
