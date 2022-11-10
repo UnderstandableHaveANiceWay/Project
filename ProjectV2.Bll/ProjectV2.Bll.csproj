@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Heroic.AutoMapper" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectV2.Common\ProjectV2.Common.csproj" />
+    <ProjectReference Include="..\ProjectV2.Dal\ProjectV2.Dal.csproj" />
+    <ProjectReference Include="..\ProjectV2.Domain\ProjectV2.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
