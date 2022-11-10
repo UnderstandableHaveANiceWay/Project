@@ -15,7 +15,7 @@ namespace ProjectV2.Common.Exceptions
             }
             else if (context.Exception is Exception e)
             {
-                context.Result = new ObjectResult(e.Message) { StatusCode = 500 };
+                context.Result = new ObjectResult("Error") { StatusCode = 500 };
                 context.ExceptionHandled = true;
             }
         }
