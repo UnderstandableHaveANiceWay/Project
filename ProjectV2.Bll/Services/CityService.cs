@@ -59,7 +59,7 @@ namespace ProjectV2.Bll.Services
         public async Task<CityDto> CreateCityAsync(CityUpdateDto cityUpdateDto)
         {
             var city = _mapper.Map<City>(cityUpdateDto);
-            if (_repository.ExistInDbByProperties(city, nameof(city.Name)))
+            if (_repository.ExistInDbByEntityWithProperties(city, nameof(city.Name)))
             {
                 throw new ExistInDbException();
             }

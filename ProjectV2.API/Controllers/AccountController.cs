@@ -7,7 +7,7 @@ using ProjectV2.Common.Dtos.Account;
 
 namespace ProjectV2.API.Controllers
 {
-    [Route("api")]
+    [Route("api/account")]
     public class AccountController : AppBaseController
     {
         private ITokenService _tokenService;
@@ -48,6 +48,12 @@ namespace ProjectV2.API.Controllers
         public IActionResult CheckAvailableUsername([FromBody] string username)
         {
             return Ok(!_userService.UserExistByUsername(username));
+        }
+
+        [HttpPost("checkavailableemail")]
+        public IActionResult CheckAvailableEmail([FromBody] string email)
+        {
+            return Ok(!_userService.UserExistByEmail(email));
         }
     }
 }

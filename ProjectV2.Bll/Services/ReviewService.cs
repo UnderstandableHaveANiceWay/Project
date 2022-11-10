@@ -42,7 +42,7 @@ namespace ProjectV2.Bll.Services
         public async Task<ReviewDto> CreateReviewAsync(ReviewUpdateDto reviewUpdateDto)
         {
             var review = _mapper.Map<Review>(reviewUpdateDto);
-            if (_repository.ExistInDbByProperties(review, nameof(review.UserId), nameof(review.SightId)))
+            if (_repository.ExistInDbByEntityWithProperties(review, nameof(review.UserId), nameof(review.SightId)))
             {
                 throw new ExistInDbException();
             }

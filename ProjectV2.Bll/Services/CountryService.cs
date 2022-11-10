@@ -43,7 +43,7 @@ namespace ProjectV2.Bll.Services
         public async Task<CountryDto> CreateCountryAsync(CountryUpdateDto countryUpdateDto)
         {
             var country = _mapper.Map<Country>(countryUpdateDto);
-            if (_repository.ExistInDbByProperties(country, nameof(country.Name)))
+            if (_repository.ExistInDbByEntityWithProperties(country, nameof(country.Name)))
             {
                 throw new ExistInDbException();
             }

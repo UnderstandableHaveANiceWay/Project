@@ -62,7 +62,7 @@ namespace ProjectV2.Bll.Services
         public async Task<SightDto> CreateSightAsync(SightUpdateDto sightUpdateDto)
         {
             var sight = _mapper.Map<Sight>(sightUpdateDto);
-            if (_repository.ExistInDbByProperties(sight, nameof(sight.Name)))
+            if (_repository.ExistInDbByEntityWithProperties(sight, nameof(sight.Name)))
             {
                 throw new ExistInDbException();
             }

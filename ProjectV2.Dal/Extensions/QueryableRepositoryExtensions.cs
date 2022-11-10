@@ -5,7 +5,7 @@ namespace ProjectV2.Dal.Interfaces
 {
     public static class QueryableRepositoryExtensions
     {
-        public static bool ExistInDbByProperties<TEntity>(
+        public static bool ExistInDbByEntityWithProperties<TEntity>(
             this IRepository<TEntity> repository,
             TEntity entity,
             params string[] propertieNames)
@@ -21,18 +21,7 @@ namespace ProjectV2.Dal.Interfaces
             }
             return true;
         }
-        public static IQueryable<TEntity> GetByProperties<TEntity>(
-            this IRepository<TEntity> repository,
-            TEntity entity,
-            params string[] propertieNames)
-            where TEntity : BaseEntity
-        {
-            if (propertieNames.Length < 1) return Enumerable.Empty<TEntity>().AsQueryable();
 
-            var entitiesWithSameProperties = EqualityOfProperties(repository.GetIQueryableAll(), entity, propertieNames);
-
-            return entitiesWithSameProperties;
-        }
         private static IQueryable<TEntity> EqualityOfProperties<TEntity>(
             IQueryable<TEntity> entities,
             TEntity entity,

@@ -42,7 +42,7 @@ namespace ProjectV2.Bll.Services
         public async Task<RoleDto> CreateRoleAsync(RoleUpdateDto roleUpdateDto)
         {
             var role = _mapper.Map<Role>(roleUpdateDto);
-            if (_repository.ExistInDbByProperties(role, nameof(role.Name)))
+            if (_repository.ExistInDbByEntityWithProperties(role, nameof(role.Name)))
             {
                 throw new ExistInDbException();
             }

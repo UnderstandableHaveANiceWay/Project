@@ -39,7 +39,7 @@ namespace ProjectV2.Bll.Services
         {
             var sightImage = _mapper.Map<SightImage>(sightImageUpdateDto);
 
-            if (_repository.ExistInDbByProperties(sightImage, nameof(sightImage.Name), nameof(sightImage.SightId)))
+            if (_repository.ExistInDbByEntityWithProperties(sightImage, nameof(sightImage.Name), nameof(sightImage.SightId)))
             {
                 throw new ExistInDbException();
             }

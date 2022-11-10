@@ -45,14 +45,21 @@ namespace ProjectV2.Bll.Services
             return _repository
                     .GetIQueryableAll()
                     .Where( u => u.Username == username )
-                    .ToList()
-                    .Count > 0;
+                    .Count() > 0;
+        }
+
+        public bool UserExistByEmail(string email)
+        {
+            return _repository
+                    .GetIQueryableAll()
+                    .Where(u => u.Email == email)
+                    .Count() > 0;
         }
 
         public async Task<UserDto> CreateUserAsync(UserUpdateDto userUpdateDto)
         {
             var user = _mapper.Map<User>(userUpdateDto);
-            if ( _repository.ExistInDbByProperties(user, nameof(user.Username)))
+            if ( _repository.ExistInDbByEntityWithProperties(user, nameof(user.Username)))
             {
                 throw new ExistInDbException();
             } 

@@ -14,6 +14,7 @@ namespace ProjectV2.Bll.Interfaces
         public Task<UserDto> GetByIdAsync(int id);
         public Task<IList<UserDto>> GetAllAsync();
         public bool UserExistByUsername(string username);
+        public bool UserExistByEmail(string email);
         public Task<UserDto> CreateUserAsync(UserUpdateDto userUpdateDto);
         public Task UpdateUserAsync(int id, UserUpdateDto userUpdateDto);
         public Task DeleteUserAsync(int id);
