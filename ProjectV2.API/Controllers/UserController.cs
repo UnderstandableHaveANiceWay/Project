@@ -5,6 +5,7 @@ using ProjectV2.Common.Dtos.Users;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/users")]
     public class UserController : AppBaseController
     {
@@ -26,7 +27,6 @@ namespace ProjectV2.API.Controllers
             return Ok(userDto);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsersAsync()
         {
@@ -34,6 +34,7 @@ namespace ProjectV2.API.Controllers
             return Ok(userDtos);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody]UserUpdateDto userUpdateDto)
         {

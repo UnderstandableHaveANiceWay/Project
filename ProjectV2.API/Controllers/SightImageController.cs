@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectV2.Bll.Interfaces;
 using ProjectV2.Bll.Services;
@@ -9,6 +10,7 @@ using ProjectV2.Domain;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/sights/{sightId}/images")]
     public class SightImageController : AppBaseController
     {
@@ -19,6 +21,7 @@ namespace ProjectV2.API.Controllers
             _sightImageService = sightImageService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllImagesOfSightAsync([FromRoute] int sightId)
         {

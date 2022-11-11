@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectV2.Bll.Interfaces;
 using ProjectV2.Common.Dtos.Reviews;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin, user")]
     [Route("api/reviews")]
     public class ReviewController : AppBaseController
     {

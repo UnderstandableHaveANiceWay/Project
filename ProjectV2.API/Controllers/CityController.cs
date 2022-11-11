@@ -5,6 +5,7 @@ using ProjectV2.Common.Dtos.Cities;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/cities")]
     public class CityController : AppBaseController
     {
@@ -33,6 +34,7 @@ namespace ProjectV2.API.Controllers
             return Ok(cityDtos);
         }
 
+        [AllowAnonymous]
         [HttpGet("from/{country}")]
         public async Task<IActionResult> GetAllCitiesOfCountryAsync([FromRoute] string country)
         {
@@ -40,7 +42,6 @@ namespace ProjectV2.API.Controllers
             return Ok(cityDtos);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> CreateCityAsync([FromBody] CityUpdateDto cityUpdateDto)
         {
@@ -65,7 +66,6 @@ namespace ProjectV2.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCityAsync([FromRoute] int id)
         {

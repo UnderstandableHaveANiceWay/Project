@@ -6,6 +6,7 @@ using ProjectV2.Common.Dtos.Sights;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/sights")]
     public class SightController : AppBaseController
     {
@@ -27,6 +28,7 @@ namespace ProjectV2.API.Controllers
             return Ok(sightDto);
         }
 
+        [AllowAnonymous]
         [HttpGet("from/{city}")]
         public async Task<IActionResult> GetAllSightsFromCityAsync([FromRoute] string city)
         {

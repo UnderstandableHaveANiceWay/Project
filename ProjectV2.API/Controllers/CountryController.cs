@@ -5,6 +5,7 @@ using ProjectV2.Common.Dtos.Countries;
 
 namespace ProjectV2.API.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/countries")]
     public class CountryController : AppBaseController
     {
@@ -28,6 +29,7 @@ namespace ProjectV2.API.Controllers
             return Ok(countryDto);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllCountrysAsync()
         {
@@ -35,7 +37,6 @@ namespace ProjectV2.API.Controllers
             return Ok(countryDtos);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> CreateCountryAsync([FromBody] CountryUpdateDto countryUpdateDto)
         {
@@ -47,7 +48,6 @@ namespace ProjectV2.API.Controllers
             return Ok(countryDto);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCountryAsync([FromRoute] int id, [FromBody] CountryUpdateDto countryUpdateDto)
         {
