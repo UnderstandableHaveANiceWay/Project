@@ -33,7 +33,6 @@ internal class Program
         builder.Services.AddScoped<ICityService, CityService>();
         builder.Services.AddScoped<ICountryService, CountryService>();
         builder.Services.AddScoped<IReviewService, ReviewService>();
-        builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<ISightService, SightService>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<ISightImageService, SightImageService>();
