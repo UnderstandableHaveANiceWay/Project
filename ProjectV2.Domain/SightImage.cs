@@ -3,8 +3,9 @@
     public class SightImage : BaseEntity
     {
         public string Name { get; set; }
-        public string DirPath { get; set; }
-        public string FullPath { get; set; }
+
+        public byte[] File { get; set; }
+
         public string Type { get; set; }
 
         public int SightId { get; set; }

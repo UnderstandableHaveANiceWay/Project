@@ -48,6 +48,24 @@ namespace ProjectV2.Bll.Services
             return sightDtos;
         }
 
+        public async Task<ICollection<SightDto>> GetTopTenSightOfCityAsync(int cityId)
+        {
+
+            var topTenSights = _repository.GetIQueryableAll()
+                .Where(s => s.CityId == cityId && s.VisitPriority > 0)
+                .OrderBy(s => s.VisitPriority)
+                .Take(10)
+                .ToListAsync();
+
+            var sightDtos = new List<SightDto>();
+            foreach (var s in await topTenSights)
+            {
+                sightDtos.Add(_mapper.Map<SightDto>(s));
+            }
+
+            return sightDtos;
+        }
+
         public async Task<ICollection<SightDto>> GetAllAsync()
         {
             var sights = _repository.GetAllAsync();

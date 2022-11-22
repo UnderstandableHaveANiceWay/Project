@@ -63,7 +63,7 @@ namespace ProjectV2.API.Controllers
                 return BadRequest();
             }
             await _cityService.UpdateCityAsync(id, cityUpdateDto);
-            return Ok();
+            return Ok(cityDto);
         }
 
         [HttpDelete("{id}")]

@@ -14,7 +14,7 @@ namespace ProjectV2.Bll.Profiles
         public SightImageProfile()
         {
             CreateMap<SightImageUpdateDto, SightImage>();
-            CreateMap<SightImage, SightImageDto>();
+            CreateMap<SightImage, SightImageDto>().ForMember(sID => sID.File, opt => opt.MapFrom(source => Convert.ToBase64String(source.File)));
         }
     }
 }

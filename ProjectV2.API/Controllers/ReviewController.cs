@@ -34,6 +34,14 @@ namespace ProjectV2.API.Controllers
             return Ok(reviewDtos);
         }
 
+        [AllowAnonymous]
+        [HttpGet("sight/{id}")]
+        public async Task<IActionResult> GetAllReviewsOfSight([FromRoute] int id)
+        {
+            var reviewDtos = await _reviewService.GetAllOfSightAsync(id);
+            return Ok(reviewDtos);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateReviewAsync([FromBody] ReviewUpdateDto reviewUpdateDto)
         {

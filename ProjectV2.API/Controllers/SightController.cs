@@ -17,6 +17,7 @@ namespace ProjectV2.API.Controllers
             _sightService = sightService;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSightAsync([FromRoute] int id)
         {
@@ -36,6 +37,15 @@ namespace ProjectV2.API.Controllers
             return Ok(sightDtos);
         }
 
+        [AllowAnonymous]
+        [HttpGet("hot/from/{cityId}")]
+        public async Task<IActionResult> GetTopTenSightsAsync([FromRoute] int cityId)
+        {
+            var topTenSights = await _sightService.GetTopTenSightOfCityAsync(cityId);
+            return Ok(topTenSights);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> GetAllSightsAsync()
         {
@@ -43,7 +53,6 @@ namespace ProjectV2.API.Controllers
             return Ok(sightDtos);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> CreateSightAsync([FromBody] SightUpdateDto sightUpdateDto)
         {
@@ -55,7 +64,6 @@ namespace ProjectV2.API.Controllers
             return Ok(sightDto);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSightAsync([FromRoute] int id, [FromBody] SightUpdateDto sightUpdateDto)
         {
@@ -65,10 +73,9 @@ namespace ProjectV2.API.Controllers
                 return BadRequest();
             }
             await _sightService.UpdateSightAsync(id, sightUpdateDto);
-            return Ok();
+            return Ok(sightDto);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSightAsync([FromRoute] int id)
         {

@@ -12,7 +12,6 @@ namespace ProjectV2.Bll.Interfaces
         public Task<SightImageDto> GetByIdAsync(int id);
         public Task<IList<SightImageDto>> GetAllOfSightAsync(int sightId);
         public Task<SightImageDto> CreateSightImageAsync(SightImageUpdateDto sightImageUpdateDto);
-        public Task UpdateSightImageAsync(SightImageUpdateDto sightImageUpdateDto);
-        public Task DeleteSightImageAsync(int sightId, string sightImageName);
+        public Task DeleteSightImageAsync(int sightId);
     }
 }

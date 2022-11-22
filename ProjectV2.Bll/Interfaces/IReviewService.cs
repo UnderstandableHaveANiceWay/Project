@@ -11,6 +11,7 @@ namespace ProjectV2.Bll.Interfaces
     {
         public Task<ReviewDto> GetByIdAsync(int id);
         public Task<IList<ReviewDto>> GetAllAsync();
+        public Task<IList<ReviewDto>> GetAllOfSightAsync(int sightId);
         public Task<ReviewDto> CreateReviewAsync(ReviewUpdateDto reviewUpdateDto);
         public Task UpdateReviewAsync(int id, ReviewUpdateDto reviewUpdateDto);
         public Task DeleteReviewAsync(int id);

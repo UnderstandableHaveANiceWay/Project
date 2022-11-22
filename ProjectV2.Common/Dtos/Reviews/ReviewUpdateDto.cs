@@ -14,7 +14,10 @@ namespace ProjectV2.Common.Dtos.Reviews
         public string Text { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public double Rating { get; set; }
+
+        [Required]
+        public string Username { get; set; }
 
         [Required]
         public int SightId { get; set; }

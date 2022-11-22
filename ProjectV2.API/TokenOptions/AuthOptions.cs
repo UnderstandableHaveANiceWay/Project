@@ -11,7 +11,7 @@ namespace ProjectV2.API.TokenOptions
 
         const string KEY = "sifratorAuthorAmdarisHigherMe!123";
 
-        public const int LIFETIME = 1;
+        public const int LIFETIME = 10;
 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

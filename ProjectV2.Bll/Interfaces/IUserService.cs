@@ -12,6 +12,7 @@ namespace ProjectV2.Bll.Interfaces
     public interface IUserService
     {
         public Task<UserDto> GetByIdAsync(int id);
+        public Task<int> GetIdByUsernameAsync(string username);
         public Task<IList<UserDto>> GetAllAsync();
         public bool UserExistByUsername(string username);
         public bool UserExistByEmail(string email);

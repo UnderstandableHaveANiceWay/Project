@@ -10,6 +10,8 @@ namespace ProjectV2.Domain
     {
         public string Text { get; set; }
 
+        public double Rating { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
         

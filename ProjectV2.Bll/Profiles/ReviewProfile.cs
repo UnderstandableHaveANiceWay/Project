@@ -8,8 +8,8 @@ namespace ProjectV2.Bll.Profiles
     {
         public ReviewProfile()
         {
-            CreateMap<ReviewUpdateDto, Review>();
-            CreateMap<ReviewDto, ReviewDto>();
+            CreateMap<ReviewUpdateDto, Review>().ForMember((r) => r.UserId, opt => opt.MapFrom((rUpdateDto) => 0));
+            CreateMap<Review, ReviewDto>();
         }
     }
 }

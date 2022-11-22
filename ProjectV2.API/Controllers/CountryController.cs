@@ -57,10 +57,9 @@ namespace ProjectV2.API.Controllers
                 return BadRequest();
             }
             await _countryService.UpdateCountryAsync(id, countryUpdateDto);
-            return Ok();
+            return Ok(countryDto);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCountryAsync([FromRoute] int id)
         {

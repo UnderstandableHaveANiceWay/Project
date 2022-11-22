@@ -13,7 +13,5 @@ namespace ProjectV2.Common.Dtos.Users
         public string Id { get; set; }
 
         public string Username { get; set; }
-
-        public string Email { get; set; }
     }
 }

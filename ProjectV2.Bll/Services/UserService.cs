@@ -29,6 +29,22 @@ namespace ProjectV2.Bll.Services
             return _mapper.Map<UserDto>(user);
         }
 
+        public async Task<int> GetIdByUsernameAsync(string username)
+        {
+            var userId = await _repository
+                .GetIQueryableAll()
+                .Where(u => u.Username.Equals(username))
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
+
+            if (userId == 0)
+            {
+                throw new NotExistInDbException();
+            }
+
+            return userId;
+        }
+
         public async Task<IList<UserDto>> GetAllAsync()
         {
             var users = _repository.GetAllAsync();

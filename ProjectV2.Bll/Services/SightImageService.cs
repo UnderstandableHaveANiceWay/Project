@@ -43,28 +43,27 @@ namespace ProjectV2.Bll.Services
             {
                 throw new ExistInDbException();
             }
-            sightImage.DirPath = @$"{sightImageUpdateDto.SightId}";
-            sightImage.FullPath = @$"{sightImageUpdateDto.SightId}" +
-                                  @$"/{sightImageUpdateDto.Name}.{sightImageUpdateDto.Type}";
 
             await _repository.AddAsync(sightImage);
             await _repository.SaveChangesAsync();
             return _mapper.Map<SightImageDto>(sightImage);
         }
 
-        public async Task DeleteSightImageAsync(int sightId, string sightImageName)
+        public async Task DeleteSightImageAsync(int sightId)
         {
-            var sightImage = _repository
+            var sightImages = _repository
                 .GetIQueryableAll()
-                .Where(sI => sI.Name == sightImageName && sI.SightId == sightId)
-                .ToList()
-                .FirstOrDefault();
+                .Where(sI => sI.SightId == sightId)
+                .ToList();
 
-            if (sightImage is null)
+            var deletingTasks = new Task[sightImages.Count];
+
+            for (int i = 0; i < sightImages.Count; ++i)
             {
-                throw new NotExistInDbException();
+                deletingTasks[i] = _repository.DeleteAsync(sightImages[i].Id);
             }
-            await _repository.DeleteAsync(sightImage.Id);
+
+            Task.WaitAll(deletingTasks);
             await _repository.SaveChangesAsync();
         }
 
@@ -81,22 +80,6 @@ namespace ProjectV2.Bll.Services
                 sightImageDtos.Add(_mapper.Map<SightImageDto>(sI));
             }
             return sightImageDtos;
-        }
-
-        public async Task UpdateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
-        {
-            var sightImage = _repository
-                .GetIQueryableAll()
-                .Where(sI => sI.Name == sightImageUpdateDto.Name && sI.SightId == sightImageUpdateDto.SightId)
-                .ToList()
-                .FirstOrDefault();
-
-            if (sightImage is null)
-            {
-                throw new NotExistInDbException();
-            }
-            _mapper.Map(sightImageUpdateDto, sightImage);
-            await _repository.SaveChangesAsync();
         }
     }
 }
