@@ -35,6 +35,17 @@ namespace ProjectV2.Bll.Services
             return _mapper.Map<SightImageDto>(sightImage);
         }
 
+        public async Task<(byte[], string)> GetByIdByteArrayAsync(int id)
+        {
+            var sightImage = await _repository.GetByIdAsync(id);
+
+            if (sightImage is null)
+            {
+                throw new NotExistInDbException();
+            }
+            return (sightImage.File, sightImage.Type);
+        }
+
         public async Task<SightImageDto> CreateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
         {
             var sightImage = _mapper.Map<SightImage>(sightImageUpdateDto);
@@ -67,7 +78,7 @@ namespace ProjectV2.Bll.Services
             await _repository.SaveChangesAsync();
         }
 
-        public async Task<IList<SightImageDto>> GetAllOfSightAsync(int sightId)
+        public async Task<IList<SightImageDto>> GetAllOfSightByteArrayAsync(int sightId)
         {
             var sightImages = _repository
                 .GetIQueryableAll()
@@ -80,6 +91,28 @@ namespace ProjectV2.Bll.Services
                 sightImageDtos.Add(_mapper.Map<SightImageDto>(sI));
             }
             return sightImageDtos;
+        }
+
+        public async Task<IList<SightImageWithFileUrlDto>> GetAllOfSightFileUrlAsync(int sightId)
+        {
+            var sightImages = _repository
+                .GetIQueryableAll()
+                .Where(sI => sI.SightId.Equals(sightId))
+                .Select(s => new {s.Id, s.Name, s.SightId, s.Type})
+                .ToListAsync();
+
+            var sightImageWithFileUrlDtos = new List<SightImageWithFileUrlDto>();
+            foreach (var sI in await sightImages)
+            {
+                sightImageWithFileUrlDtos.Add(_mapper.Map<SightImageWithFileUrlDto>(new SightImageWithoutFileDto()
+                {
+                    Id = sI.Id,
+                    Name = sI.Name,
+                    SightId = sI.SightId,
+                    Type = sI.Type
+                }));
+            }
+            return sightImageWithFileUrlDtos;
         }
     }
 }

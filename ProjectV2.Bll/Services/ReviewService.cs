@@ -5,6 +5,7 @@ using ProjectV2.Common.Dtos.Reviews;
 using ProjectV2.Common.Exceptions;
 using ProjectV2.Dal.Interfaces;
 using ProjectV2.Domain;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ProjectV2.Bll.Services
 {
@@ -62,10 +63,15 @@ namespace ProjectV2.Bll.Services
             return reviewDtos;
         }
 
-        public async Task<ReviewDto> CreateReviewAsync(ReviewUpdateDto reviewUpdateDto)
+        public async Task<ReviewDto> CreateReviewAsync(ReviewUpdateDto reviewUpdateDto, string token)
         {
+            var handler = new JwtSecurityTokenHandler();
+            var securityToken = handler.ReadJwtToken(token);
+
+            var username = securityToken.Claims.First().Value;
+
             var user = _userRepository.GetIQueryableAll()
-                .FirstOrDefault(u => u.Username == reviewUpdateDto.Username);
+                .FirstOrDefault(u => u.Username == username);
 
             if (user == null)
             {

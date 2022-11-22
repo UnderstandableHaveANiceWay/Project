@@ -24,10 +24,26 @@ namespace ProjectV2.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> GetAllImagesOfSightAsync([FromRoute] int sightId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAllImagesOfSightAsync([FromRoute] int sightId, [FromRoute] int id)
         {
-            var sightImageDtos = await _sightImageService.GetAllOfSightAsync(sightId);
+            var file = await _sightImageService.GetByIdByteArrayAsync(id);
+            return File(file.Item1, file.Item2);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("byte")]
+        public async Task<IActionResult> GetAllImagesOfSightByteArrayAsync([FromRoute] int sightId)
+        {
+            var sightImageDtos = await _sightImageService.GetAllOfSightByteArrayAsync(sightId);
+            return Ok(sightImageDtos);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetAllImagesOfSightFileUrlAsync([FromRoute] int sightId)
+        {
+            var sightImageDtos = await _sightImageService.GetAllOfSightFileUrlAsync(sightId);
             return Ok(sightImageDtos);
         }
 

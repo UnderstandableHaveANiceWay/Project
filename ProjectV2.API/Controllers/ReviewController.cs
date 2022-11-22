@@ -45,7 +45,9 @@ namespace ProjectV2.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateReviewAsync([FromBody] ReviewUpdateDto reviewUpdateDto)
         {
-            ReviewDto reviewDto = await _reviewService.CreateReviewAsync(reviewUpdateDto);
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            ReviewDto reviewDto = await _reviewService.CreateReviewAsync(reviewUpdateDto, token);
             if (reviewDto is null)
             {
                 return BadRequest();
