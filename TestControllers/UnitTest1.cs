@@ -129,7 +129,7 @@ namespace TestControllers
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 var obj = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
-                Assert.IsTrue(obj.Id == id);
+                Assert.IsTrue(Int32.Parse(obj.Id) == id);
             }
             else
             {

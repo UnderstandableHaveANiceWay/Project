@@ -27,7 +27,7 @@ namespace ProjectV2.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
+        public async Task<IActionResult> CreateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto)
         {
             var sightImageDto = await _sightImageService.CreateSightImageAsync(sightImageUpdateDto);
             if (sightImageDto is null)
@@ -38,7 +38,7 @@ namespace ProjectV2.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
+        public async Task<IActionResult> UpdateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto)
         {
             await _sightImageService.UpdateSightImageAsync(sightImageUpdateDto);
             return Ok();

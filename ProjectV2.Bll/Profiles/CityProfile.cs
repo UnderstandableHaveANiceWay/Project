@@ -8,8 +8,8 @@ namespace ProjectV2.Bll.Profiles
     {
         public CityProfile()
         {
-            CreateMap<CityUpdateDto, City>();
-            CreateMap<City, CityDto>();
+            CreateMap<CityUpdateDto, Floor>();
+            CreateMap<Floor, CityDto>();
         }
     }
 }

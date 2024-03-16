@@ -8,8 +8,8 @@ namespace ProjectV2.Bll.Profiles
     {
         public SightProfile()
         {
-            CreateMap<SightUpdateDto, Sight>();
-            CreateMap<Sight, SightDto>();
+            CreateMap<RoomUpdateDto, Room>();
+            CreateMap<Room, RoomDto>();
         }
     }
 }

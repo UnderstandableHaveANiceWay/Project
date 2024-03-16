@@ -19,7 +19,7 @@ namespace ProjectV2.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSightAsync([FromRoute] int id)
         {
-            SightDto sightDto = await _sightService.GetByIdAsync(id);
+            RoomDto sightDto = await _sightService.GetByIdAsync(id);
             if (sightDto is null)
             {
                 return BadRequest();
@@ -43,9 +43,9 @@ namespace ProjectV2.API.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateSightAsync([FromBody] SightUpdateDto sightUpdateDto)
+        public async Task<IActionResult> CreateSightAsync([FromBody] RoomUpdateDto sightUpdateDto)
         {
-            SightDto sightDto = await _sightService.CreateSightAsync(sightUpdateDto);
+            RoomDto sightDto = await _sightService.CreateSightAsync(sightUpdateDto);
             if (sightDto is null)
             {
                 return BadRequest();
@@ -55,7 +55,7 @@ namespace ProjectV2.API.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSightAsync([FromRoute] int id, [FromBody] SightUpdateDto sightUpdateDto)
+        public async Task<IActionResult> UpdateSightAsync([FromRoute] int id, [FromBody] RoomUpdateDto sightUpdateDto)
         {
             var sightDto = await _sightService.GetByIdAsync(id);
             if (sightDto is null)

@@ -10,10 +10,10 @@ namespace ProjectV2.Bll.Services
 {
     public class CityService : ICityService
     {
-        private readonly IRepository<City> _repository;
+        private readonly IRepository<Floor> _repository;
         private readonly IMapper _mapper;
 
-        public CityService(IRepository<City> repository, IMapper mapper)
+        public CityService(IRepository<Floor> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -58,7 +58,7 @@ namespace ProjectV2.Bll.Services
 
         public async Task<CityDto> CreateCityAsync(CityUpdateDto cityUpdateDto)
         {
-            var city = _mapper.Map<City>(cityUpdateDto);
+            var city = _mapper.Map<Floor>(cityUpdateDto);
             if (_repository.ExistInDbByEntityWithProperties(city, nameof(city.Name)))
             {
                 throw new ExistInDbException();

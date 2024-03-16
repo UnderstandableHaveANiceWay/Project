@@ -16,28 +16,28 @@ namespace ProjectV2.Bll.Services
 {
     public class SightImageService : ISightImageService
     {
-        private IRepository<SightImage> _repository;
+        private IRepository<RoomImage> _repository;
         private IMapper _mapper;
 
-        public SightImageService(IRepository<SightImage> repository, IMapper mapper)
+        public SightImageService(IRepository<RoomImage> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<SightImageDto> GetByIdAsync(int id)
+        public async Task<RoomImageDto> GetByIdAsync(int id)
         {
             var sightImage = await _repository.GetByIdAsync(id);
             if (sightImage is null)
             {
                 throw new NotExistInDbException();
             }
-            return _mapper.Map<SightImageDto>(sightImage);
+            return _mapper.Map<RoomImageDto>(sightImage);
         }
 
-        public async Task<SightImageDto> CreateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
+        public async Task<RoomImageDto> CreateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto)
         {
-            var sightImage = _mapper.Map<SightImage>(sightImageUpdateDto);
+            var sightImage = _mapper.Map<RoomImage>(sightImageUpdateDto);
 
             if (_repository.ExistInDbByEntityWithProperties(sightImage, nameof(sightImage.Name), nameof(sightImage.SightId)))
             {
@@ -49,7 +49,7 @@ namespace ProjectV2.Bll.Services
 
             await _repository.AddAsync(sightImage);
             await _repository.SaveChangesAsync();
-            return _mapper.Map<SightImageDto>(sightImage);
+            return _mapper.Map<RoomImageDto>(sightImage);
         }
 
         public async Task DeleteSightImageAsync(int sightId, string sightImageName)
@@ -68,22 +68,22 @@ namespace ProjectV2.Bll.Services
             await _repository.SaveChangesAsync();
         }
 
-        public async Task<IList<SightImageDto>> GetAllOfSightAsync(int sightId)
+        public async Task<IList<RoomImageDto>> GetAllOfSightAsync(int sightId)
         {
             var sightImages = _repository
                 .GetIQueryableAll()
                 .Where(sI => sI.SightId.Equals(sightId))
                 .ToListAsync();
 
-            var sightImageDtos = new List<SightImageDto>();
+            var sightImageDtos = new List<RoomImageDto>();
             foreach (var sI in await sightImages)
             {
-                sightImageDtos.Add(_mapper.Map<SightImageDto>(sI));
+                sightImageDtos.Add(_mapper.Map<RoomImageDto>(sI));
             }
             return sightImageDtos;
         }
 
-        public async Task UpdateSightImageAsync(SightImageUpdateDto sightImageUpdateDto)
+        public async Task UpdateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto)
         {
             var sightImage = _repository
                 .GetIQueryableAll()

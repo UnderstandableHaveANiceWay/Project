@@ -12,16 +12,16 @@ namespace ProjectV2.Bll.Services
 {
     public class SightService : ISightService
     {
-        private readonly IRepository<Sight> _repository;
+        private readonly IRepository<Room> _repository;
         private readonly IMapper _mapper;
 
-        public SightService(IRepository<Sight> repository, IMapper mapper)
+        public SightService(IRepository<Room> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<SightDto> GetByIdAsync(int id)
+        public async Task<RoomDto> GetByIdAsync(int id)
         {
             var sight = await _repository.GetByIdAsync(id);
 
@@ -29,49 +29,49 @@ namespace ProjectV2.Bll.Services
             {
                 throw new NotExistInDbException();
             }
-            return _mapper.Map<SightDto>(sight);
+            return _mapper.Map<RoomDto>(sight);
         }
 
-        public async Task<ICollection<SightDto>> GetAllOfCityAsync(string cityName)
+        public async Task<ICollection<RoomDto>> GetAllOfCityAsync(string cityName)
         {
             var sights = _repository
                 .GetIQueryableAll()
                 .Include((sight) => sight.City)
                 .Where((city) => city.City.Name.Equals(cityName)).ToListAsync();
 
-            var sightDtos = new List<SightDto>();
+            var sightDtos = new List<RoomDto>();
             foreach (var s in await sights)
             {
-                sightDtos.Add(_mapper.Map<SightDto>(s));
+                sightDtos.Add(_mapper.Map<RoomDto>(s));
             }
 
             return sightDtos;
         }
 
-        public async Task<ICollection<SightDto>> GetAllAsync()
+        public async Task<ICollection<RoomDto>> GetAllAsync()
         {
             var sights = _repository.GetAllAsync();
-            var sightDtos = new List<SightDto>();
+            var sightDtos = new List<RoomDto>();
             foreach (var s in await sights)
             {
-                sightDtos.Add(_mapper.Map<SightDto>(s));
+                sightDtos.Add(_mapper.Map<RoomDto>(s));
             }
             return sightDtos;
         }
 
-        public async Task<SightDto> CreateSightAsync(SightUpdateDto sightUpdateDto)
+        public async Task<RoomDto> CreateSightAsync(RoomUpdateDto sightUpdateDto)
         {
-            var sight = _mapper.Map<Sight>(sightUpdateDto);
+            var sight = _mapper.Map<Room>(sightUpdateDto);
             if (_repository.ExistInDbByEntityWithProperties(sight, nameof(sight.Name)))
             {
                 throw new ExistInDbException();
             }
             await _repository.AddAsync(sight);
             await _repository.SaveChangesAsync();
-            return _mapper.Map<SightDto>(sight);
+            return _mapper.Map<RoomDto>(sight);
         }
 
-        public async Task UpdateSightAsync(int id, SightUpdateDto sightUpdateDto)
+        public async Task UpdateSightAsync(int id, RoomUpdateDto sightUpdateDto)
         {
             var sight = await _repository.GetByIdAsync(id);
             if (sight is null)

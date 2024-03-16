@@ -1,25 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using ProjectV2.Domain;
 using ProjectV2.Dal.EntityConfigurations;
+using ProjectV2.Domain;
 
 namespace ProjectV2.Dal.DataBaseContext
 {
     public class ProjectDbContext : DbContext
     {
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Sight> Sights { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<SightImage> SightImages { get; set; } 
+        public DbSet<Booking> Bookings { get; set; } = null!;
+        public DbSet<BookingAudit> BookingAudits { get; set; } = null!;
+        public DbSet<RoomType> RoomTypes { get; set; } = null!;
+        public DbSet<Floor> Floors { get; set; } = null!;
+        public DbSet<Room> Rooms { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Review> Reviews { get; set; } = null!;
+        public DbSet<RoomImage> RoomImages { get; set; } = null!;
 
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options)
         {
@@ -29,13 +23,7 @@ namespace ProjectV2.Dal.DataBaseContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new CityConfig());
-            modelBuilder.ApplyConfiguration(new CountryConfig());
-            modelBuilder.ApplyConfiguration(new ReviewConfig());
-            modelBuilder.ApplyConfiguration(new RoleConfig());
-            modelBuilder.ApplyConfiguration(new SightConfig());
-            modelBuilder.ApplyConfiguration(new UserConfig());
-            modelBuilder.ApplyConfiguration(new SightImageConfig());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfiguration).Assembly);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

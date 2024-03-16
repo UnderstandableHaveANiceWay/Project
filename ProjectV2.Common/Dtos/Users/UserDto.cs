@@ -1,12 +1,4 @@
-﻿using ProjectV2.Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectV2.Common.Dtos.Users
+﻿namespace ProjectV2.Common.Dtos.Users
 {
     public class UserDto
     {

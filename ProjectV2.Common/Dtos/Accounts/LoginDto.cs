@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProjectV2.Common.Dtos.Users
+namespace ProjectV2.Common.Dtos.Accounts
 {
-    public class UserUpdateDto
+    public class LoginDto
     {
         [Required]
         public string Username { get; set; }
 
         [Required]
         public string Password { get; set; }
-
-        [Required]
-        public string Email { get; set; }
     }
 }

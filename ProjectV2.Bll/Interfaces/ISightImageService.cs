@@ -9,10 +9,10 @@ namespace ProjectV2.Bll.Interfaces
 {
     public interface ISightImageService
     {
-        public Task<SightImageDto> GetByIdAsync(int id);
-        public Task<IList<SightImageDto>> GetAllOfSightAsync(int sightId);
-        public Task<SightImageDto> CreateSightImageAsync(SightImageUpdateDto sightImageUpdateDto);
-        public Task UpdateSightImageAsync(SightImageUpdateDto sightImageUpdateDto);
+        public Task<RoomImageDto> GetByIdAsync(int id);
+        public Task<IList<RoomImageDto>> GetAllOfSightAsync(int sightId);
+        public Task<RoomImageDto> CreateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto);
+        public Task UpdateSightImageAsync(RoomImageUpdateDto sightImageUpdateDto);
         public Task DeleteSightImageAsync(int sightId, string sightImageName);
     }
 }

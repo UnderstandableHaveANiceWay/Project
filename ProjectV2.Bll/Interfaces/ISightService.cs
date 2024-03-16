@@ -9,11 +9,11 @@ namespace ProjectV2.Bll.Interfaces
 {
     public interface ISightService
     {
-        public Task<SightDto> GetByIdAsync(int id);
-        public Task<ICollection<SightDto>> GetAllOfCityAsync(string cityName);
-        public Task<ICollection<SightDto>> GetAllAsync();
-        public Task<SightDto> CreateSightAsync(SightUpdateDto sightUpdateDto);
-        public Task UpdateSightAsync(int id, SightUpdateDto sightUpdateDto);
+        public Task<RoomDto> GetByIdAsync(int id);
+        public Task<ICollection<RoomDto>> GetAllOfCityAsync(string cityName);
+        public Task<ICollection<RoomDto>> GetAllAsync();
+        public Task<RoomDto> CreateSightAsync(RoomUpdateDto sightUpdateDto);
+        public Task UpdateSightAsync(int id, RoomUpdateDto sightUpdateDto);
         public Task DeleteSightAsync(int id);
     }
 }

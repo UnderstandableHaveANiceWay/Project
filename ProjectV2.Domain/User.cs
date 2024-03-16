@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProjectV2.Domain.Utils.Enums;
 
 namespace ProjectV2.Domain
 {
     public class User : BaseEntity
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
-
-        public ICollection<Review>? Reviews { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string FullName { get; private set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public UserRole Role { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; } = null!;
     }
 }

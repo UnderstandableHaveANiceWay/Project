@@ -13,8 +13,8 @@ namespace ProjectV2.Bll.Profiles
     {
         public SightImageProfile()
         {
-            CreateMap<SightImageUpdateDto, SightImage>();
-            CreateMap<SightImage, SightImageDto>();
+            CreateMap<RoomImageUpdateDto, RoomImage>();
+            CreateMap<RoomImage, RoomImageDto>();
         }
     }
 }

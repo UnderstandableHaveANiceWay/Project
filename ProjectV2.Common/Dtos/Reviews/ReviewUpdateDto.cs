@@ -1,10 +1,4 @@
-﻿using ProjectV2.Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectV2.Common.Dtos.Reviews
 {
@@ -17,6 +11,6 @@ namespace ProjectV2.Common.Dtos.Reviews
         public int UserId { get; set; }
 
         [Required]
-        public int SightId { get; set; }
+        public int RoomId { get; set; }
     }
 }
